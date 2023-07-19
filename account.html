@@ -1,0 +1,186 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="js/bootstrap.js"></script>
+    <script src="js/jquery-3.6.4.js"></script>
+    <script src="js/script.js"></script>
+    <link rel="stylesheet" href="css/bootstrap.css">
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="icon" href="img/logo.jpg">
+    <title>Bank Account</title>
+</head>
+<body>
+    <div class="content">
+        <nav class="navbar navbar-expand-lg sticky-top bg-primary" data-bs-theme="dark" >
+
+            <div class="container-fluid ">
+                <a class="navbar-brand text-uppercase" href="index.html"><img src="img/logo.jpg" alt=""> Oceans Bank</a>
+                <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
+                    data-bs-target="#navbarTogglerDemo02" aria-controls="navbarTogglerDemo02" aria-expanded="false"
+                    aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+                <div class="collapse navbar-collapse" id="navbarTogglerDemo02">
+                    <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                        <li class="nav-item">
+                            <a class="nav-link" href="index.html">Home</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link active" aria-current="page " href="account.html">Transactions</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="#">Contact Us</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="#">About Us</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="#">Store</a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </nav>
+        <div class="background02">
+            <img src="img/istockphoto-lgn-1371944453-612x612.jpg" alt="">
+        </div>
+        <div class="container-fluid py-5 form">
+            <div class="container py-5">
+                <form id="formOne" class="text-center">
+                    <h2 class="text-primary text-center">Create New Account</h2>
+                    <div class="form-group mb-1">
+                        <input type="text" id="full-name" class="form-control" placeholder="Full Name" required>
+                    </div>
+                    <div class="form-group mb-1">
+                        <input type="number" id="deposit" class="form-control" placeholder="Initial Deposit ₦" required>
+                    </div>
+                    <div class="form-group mb-4">
+                        <select name="" id="type" class="form-control">
+                            <option value="">Account Type</option>
+                            <option value="Savings">Savings</option>
+                            <option value="Current">Current</option>
+                        </select>
+                    </div>
+
+                    <button class="btn btn-primary btn-block" type="submit">Register Account</button>
+                </form>
+            </div>
+            <div class="alert alert-success alert-dismissible fade show" role="alert" id="welcome-alert">
+                You have successfully registered an account with ACEDU.<strong>Welcome!</strong> 
+                <button type="button" class="btn-close"  aria-label="Close"></button>
+            </div>
+        </div>
+        
+        <div class="container-fluid bg-info py-3 mt-5">
+            <div class="container">
+                <div class="bank-account mb-5">
+                    <h2 class="text-uppercase solid-ticket text-light text-center">💳Bank Account</h2>
+
+                    <div class="row column-gap-3">
+                        <div class="col-lg-4 accounts mb-1">
+                            <h4 class="text-uppercase solid-ticket text-primary text-center ">Bank Accounts</h4>
+                            <ul id="accountsList">
+
+                            </ul>
+                        </div>
+                        <div class="col-lg-7 mb-1">
+                            <div class="account-info">
+                                <h4 class="text-uppercase solid-ticket text-primary text-center ">Bank Account Information</h4>
+                                <p>ACCOUNT NAME: <span class="account-name"></span></p>
+                                <p>ACCOUNT ID: <span class="account-id"></span></p>
+                                <p>ACCOUNT TYPE: <span class="account-type"></span></p>
+                                <p>CURRENT BALANCE: ₦<span class="current-balance"></span></p>
+                                <p>TRANSACTION HISTORY: <span class="history"></span></p>
+
+                                <div id="buttons">
+
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <h4 class="text-uppercase solid-ticket text-primary text-center mt-5"> Transactions</h4>
+        <div class="background03">
+            <img src="img/istockphoto-1368593225-612x612.jpg" alt="">
+        </div>
+        <div class="container-fluid">
+            <div class="container">
+                <div class="selection text-center">
+                    <div class="alert alert-success alert-dismissible fade show" role="alert" id="success-alert">
+                        <strong>Transaction Successful!</strong> 
+                        <button type="button" class="btn-close" aria-label="Close"></button>
+                    </div>
+                    <div class="alert alert-danger alert-dismissible fade show" role="alert" id="failure-alert">
+                        <strong>Insufficient Funds! Unable to complete transaction.</strong> 
+                        <button type="button" class="btn-close" aria-label="Close"></button>
+                    </div>
+                    <!-- <div class="row column-gap-1">
+                        <div class="col-4 deposit">
+                            <h4 class="text-uppercase solid-ticket text-primary text-center py-5">Deposit</h4>
+                        </div>
+                        <div class="col-4 withdrawal">
+                            <h4 class="text-uppercase solid-ticket text-primary text-center py-5">Withdrawal</h4>
+                        </div>
+                        <div class="col-3 transfer">
+                            <h4 class="text-uppercase solid-ticket text-primary text-center py-5">Transfer</h4>
+                        </div>
+                    </div> -->
+
+                    <div class="btn-group btn-group-lg" role="group" aria-label="Large button group">
+                        <button type="button" class="btn btn-primary" id="depositView">₦ Deposit</button>
+                        <button type="button" class="btn btn-info" id="withdrawalView">₦ Withdrawal</button>
+                        <button type="button" class="btn btn-success" id="transferView">₦ Transfer</button>
+                    </div>
+
+                    <form action="" class="formDeposit">
+                        <h4 class="text-uppercase solid-ticket text-primary text-center ">Deposit</h4>
+                        <div class="form-group mb-2">
+                            <input type="number" name="" id="depositAccount" class="form-control" placeholder="Account Number" required>
+                        </div>
+                        <div class="form-group mb-2">
+                            <input type="number" name="" id="depositAmount" class="form-control" placeholder="₦ Amount" required>
+                        </div>
+
+                        <button class="btn btn-primary" type="submit">Make Payment</button>
+                    </form>
+
+                    <form action="" class="formWithdrawal">
+                        <h4 class="text-uppercase solid-ticket text-primary text-center ">Withdraw</h4>
+                        <div class="form-group mb-2">
+                            <input type="number" name="" id="withdrawalAccount" class="form-control" placeholder="Account Number" required>
+                        </div>
+                        <div class="form-group mb-2">
+                            <input type="number" name="" id="withdrawalAmount" class="form-control" placeholder="₦ Amount" required>
+                        </div>
+
+                        <button class="btn btn-primary" type="submit">Withdraw</button>
+                    </form>
+
+                    <form action="" class="formTransfer">
+                        <h4 class="text-uppercase solid-ticket text-primary text-center ">Transfer</h4>
+                        <div class="form-group mb-2">
+                            <input type="number" name="" id="senderAccount" class="form-control" placeholder="Your Account Number" required>
+                        </div>
+
+                        <div class="form-group mb-2">
+                            <input type="number" name="" id="recipientAccount" class="form-control" placeholder="Recipient's Account Number" required>
+                        </div>
+
+                        <div class="form-group mb-2">
+                            <input type="number" name="" id="transferAmount" class="form-control" placeholder="₦ Amount" required>
+                        </div>
+
+                        <button class="btn btn-primary" type="submit">Make Payment</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
