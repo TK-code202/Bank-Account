@@ -35,12 +35,29 @@ BankAccount.prototype.deleteAccount = function (id) {
 
 
 
+
 // Business Logic for Accounts ---------
 function Account(name, balance, type) {
     this.name = name;
     this.balance = balance;
     this.type = type;
     this.history = ['Deposit: ₦ '+ balance]
+}
+
+Account.prototype.depositMoney = function (amount) {
+    let initial = parseInt(this.balance);
+    let deposit = parseInt(amount);
+    this.balance = deposit + initial;
+    let newHistory = ", Credit: ₦ " + amount;
+    this.history.push(newHistory);
+}
+
+Account.prototype.withdrawMoney = function (amount) { 
+    let initial = parseInt(this.balance);
+    let withdrawal = parseInt(amount);
+    this.balance = initial - withdrawal;
+    let newHistory = ", Debit: ₦ " + amount;
+    this.history.push(newHistory);
 }
 
 // Account.prototype.accountName = function () {
@@ -107,11 +124,7 @@ function attachTaskListeners() {
 
 function Deposit(accountId, amount) {
     const account = bankAccount.findAccount(accountId);
-    let initial = parseInt(account.balance);
-    let deposit = parseInt(amount);
-    account.balance = deposit + initial;
-    let newHistory = ", Credit: ₦ " + amount;
-    account.history.push(newHistory);
+    account.depositMoney(amount);
     showAccount(accountId);
 }
 
@@ -122,9 +135,7 @@ function Withdraw(accountId, amount) {
     if (withdrawal > initial) {
         $("#failure-alert").show();
     } else {
-        account.balance = initial - withdrawal;
-        let newHistory = ", Debit: ₦ " + amount;
-        account.history.push(newHistory);
+        account.withdrawMoney(amount);
         showAccount(accountId);
         $("#success-alert").show();
     };
@@ -133,7 +144,6 @@ function Withdraw(accountId, amount) {
 
 function Transfer (accountIdOne, accountIdTwo, amount) {
     const accountOne = bankAccount.findAccount(accountIdOne);
-    // const accountTwo = bankAccount.findAccount(accountIdTwo);
     let sender = parseInt(accountOne.balance);
     let payment = parseInt(amount);
 
@@ -190,7 +200,6 @@ $(document).ready(function () {
         $("input#withdrawalAmount").val("");
 
         Withdraw(inputtedAccount, inputtedDeposit);
-        // displayAccountDetails(bankAccount);
     });
 
     $("form.formTransfer").submit(function (event) {
