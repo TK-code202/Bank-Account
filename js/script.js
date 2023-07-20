@@ -48,30 +48,17 @@ Account.prototype.depositMoney = function (amount) {
     let initial = parseInt(this.balance);
     let deposit = parseInt(amount);
     this.balance = deposit + initial;
-    let newHistory = ", Credit: ₦ " + amount;
-    this.history.push(newHistory);
+    let recent = ", Credit: ₦ " + amount;
+    this.history.push(recent);
 }
 
 Account.prototype.withdrawMoney = function (amount) { 
     let initial = parseInt(this.balance);
     let withdrawal = parseInt(amount);
     this.balance = initial - withdrawal;
-    let newHistory = ", Debit: ₦ " + amount;
-    this.history.push(newHistory);
+    let recent = ", Debit: ₦ " + amount;
+    this.history.push(recent);
 }
-
-// Account.prototype.accountName = function () {
-//     return this.name;
-// };
-
-// function storeHistory (accountId){
-//     const account = bankAccount.findAccount(accountId);
-//     account.history.push(account.balance);
-//     $(".history").html(account.history);
-// }
-
-
-
 
 
 
@@ -89,7 +76,6 @@ function displayAccountDetails(bankAccountToDisplay) {
 }
 
 
-
 function showAccount(accountId) {
     const account = bankAccount.findAccount(accountId);
     $(".account-info").fadeIn(1000);
@@ -103,17 +89,11 @@ function showAccount(accountId) {
     buttons.append("<button class='deleteButton' id=" +  account.id + ">Delete Account</button>");
 
 }
+
 function attachTaskListeners() {
     $("ul#accountsList").on("click", "li", function () {
         showAccount(this.id);
     });
-
-    // $("#tickbox").on("click", ".checked", function () {
-    //     let completed = toDoList.markAsCompleted(this.id);
-    //     $(".task-status").html(completed);
-       
-        
-    // });
 
     $("#buttons").on("click", ".deleteButton", function () {
         bankAccount.deleteAccount(this.id);
@@ -144,10 +124,10 @@ function Withdraw(accountId, amount) {
 
 function Transfer (accountIdOne, accountIdTwo, amount) {
     const accountOne = bankAccount.findAccount(accountIdOne);
-    let sender = parseInt(accountOne.balance);
+    let senderBalance = parseInt(accountOne.balance);
     let payment = parseInt(amount);
 
-    if (payment > sender ) {
+    if (payment > senderBalance ) {
         $("#failure-alert").show();
     } else {
         Withdraw(accountIdOne, amount);
@@ -164,6 +144,8 @@ $(document).ready(function () {
         const inputtedType = $("select#type").val();
 
         $("input#full-name").val("");
+        $("input#pin").val("");
+        $("input#pin02").val("");
         $("input#deposit").val("");
         $("select#type").val("");
 
@@ -171,7 +153,6 @@ $(document).ready(function () {
         bankAccount.addAccounts(newAccount);
         displayAccountDetails(bankAccount);
         $("#welcome-alert").show();
-        // console.log(bankAccount.tasks);
     });
 
 
@@ -183,10 +164,10 @@ $(document).ready(function () {
 
         
         $("input#depositAccount").val("");
+        $("input#pin03").val("");
         $("input#depositAmount").val("");
 
         Deposit(inputtedAccount, inputtedDeposit);
-        // displayAccountDetails(bankAccount);
         $("#success-alert").show();
     });
 
@@ -197,6 +178,7 @@ $(document).ready(function () {
 
         
         $("input#withdrawalAccount").val("");
+        $("input#pin04").val("");
         $("input#withdrawalAmount").val("");
 
         Withdraw(inputtedAccount, inputtedDeposit);
@@ -210,11 +192,11 @@ $(document).ready(function () {
 
         
         $("input#senderAccount").val("");
+        $("input#pin05").val("");
         $("input#recipientAccount").val("");
         $("input#transferAmount").val("");
 
         Transfer(inputtedAccountOne, inputtedAccountTwo, inputtedTransfer);
-        displayAccountDetails(bankAccount);
     });
 
 
